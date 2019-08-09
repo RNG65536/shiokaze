@@ -417,7 +417,13 @@ protected:
 	parallel_driver m_parallel{this};
 };
 //
-extern "C" module * create_instance() {
+#ifdef DLLEXPORT_RCMATRIX
+#define DLLAPI_RCMATRIX DLLAPI_EXPORT
+#else
+#define DLLAPI_RCMATRIX DLLAPI_IMPORT
+#endif
+
+extern "C" DLLAPI_RCMATRIX module * create_instance() {
 	return new RCMatrix_factory<INDEX_TYPE,FLOAT_TYPE>();
 }
 extern "C" const char *license() {

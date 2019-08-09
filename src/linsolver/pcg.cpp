@@ -82,7 +82,13 @@ protected:
 	Parameters m_param;
 };
 //
-extern "C" module * create_instance() {
+#ifdef DLLEXPORT_PCG
+#define DLLAPI_PCG DLLAPI_EXPORT
+#else
+#define DLLAPI_PCG DLLAPI_IMPORT
+#endif
+
+extern "C" DLLAPI_PCG module * create_instance() {
 	return new pcg_solver<INDEX_TYPE,FLOAT_TYPE>();
 }
 //

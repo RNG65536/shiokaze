@@ -647,7 +647,13 @@ protected:
 	double m_y_prev {0.0};
 };
 //
-extern "C" module * create_instance() {
+#ifdef DLLEXPORT_MACSTREAMFUNCSOLVER2
+#define DLLAPI_MACSTREAMFUNCSOLVER2 DLLAPI_EXPORT
+#else
+#define DLLAPI_MACSTREAMFUNCSOLVER2 DLLAPI_IMPORT
+#endif
+
+extern "C" DLLAPI_MACSTREAMFUNCSOLVER2 module * create_instance() {
 	return new macstreamfuncsolver2();
 }
 //

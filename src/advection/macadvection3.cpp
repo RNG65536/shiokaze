@@ -294,7 +294,13 @@ protected:
 	double m_dx;
 };
 //
-extern "C" module * create_instance() {
+#ifdef DLLEXPORT_MACADVECTION3
+#define DLLAPI_MACADVECTION3 DLLAPI_EXPORT
+#else
+#define DLLAPI_MACADVECTION3 DLLAPI_IMPORT
+#endif
+
+extern "C" DLLAPI_MACADVECTION3 module * create_instance() {
 	return new macadvection3();
 }
 //

@@ -1,0 +1,22 @@
+add_subdirectory(bitcount)
+
+add_library(lineararray2 STATIC ${headers} lineararray2.cpp)
+add_library(lineararray3 STATIC ${headers} lineararray3.cpp)
+add_library(tiledarray2 STATIC ${headers} tiledarray2.cpp)
+add_library(tiledarray3 STATIC ${headers} tiledarray3.cpp)
+add_library(treearray2 STATIC ${headers} treearray2.cpp)
+add_library(treearray3 STATIC ${headers} treearray3.cpp)
+
+target_link_libraries(lineararray2 core bitcount)
+target_link_libraries(lineararray3 core bitcount)
+target_link_libraries(tiledarray2 core bitcount)
+target_link_libraries(tiledarray3 core bitcount)
+target_link_libraries(treearray2 core bitcount)
+target_link_libraries(treearray3 core bitcount)
+
+target_compile_definitions(lineararray2 PRIVATE "SPATIAL_DIM=2")
+target_compile_definitions(lineararray3 PRIVATE "SPATIAL_DIM=3")
+target_compile_definitions(tiledarray2 PRIVATE "SPATIAL_DIM=2")
+target_compile_definitions(tiledarray3 PRIVATE "SPATIAL_DIM=3")
+target_compile_definitions(treearray2 PRIVATE "SPATIAL_DIM=2")
+target_compile_definitions(treearray3 PRIVATE "SPATIAL_DIM=3")

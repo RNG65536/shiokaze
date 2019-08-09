@@ -395,7 +395,7 @@ void macliquid3::draw( graphics_engine &g ) const {
 	m_gridvisualizer->draw_fluid(g,m_solid,m_fluid);
 }
 //
-extern "C" module * create_instance() {
+extern "C" DLLAPI_MACLIQUID3 module * create_instance() {
 	return new macliquid3;
 }
 //

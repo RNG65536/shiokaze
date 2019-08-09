@@ -26,19 +26,27 @@
 #include <shiokaze/core/configuration.h>
 #include <string>
 #include <cmath>
+#include <algorithm>
 //
 SHKZ_USING_NAMESPACE
 //
+
+#ifdef DLLEXPORT_DAMBREAK2
+#define DLLAPI_DAMBREAK2 DLLAPI_EXPORT
+#else
+#define DLLAPI_DAMBREAK2 DLLAPI_IMPORT
+#endif
+
 static double width (0.232), height (0.432), level (0.095), depth (0.2532);
 //
-extern "C" void configure( configuration &config ) {
+extern "C" DLLAPI_DAMBREAK2 void configure( configuration &config ) {
 	configuration::auto_group group(config,"Dambreak Scene 3D","Dambreak");
 	config.get_double("Width",width,"Width of the dam");
 	config.get_double("Height",height,"Height of the dam");
 	config.get_double("Level",level,"Height of the pool");
 }
 //
-extern "C" double fluid( const vec3d &p ) {
+extern "C" DLLAPI_DAMBREAK2 double fluid( const vec3d &p ) {
 	double value = -1e9;
 	value = std::max(value,p[0]-width);
 	value = std::max(value,p[1]-height);
@@ -46,6 +54,6 @@ extern "C" double fluid( const vec3d &p ) {
 	return value;
 }
 //
-extern "C" const char *license() {
+extern "C" DLLAPI_DAMBREAK2 const char *license() {
 	return "MIT";
 }

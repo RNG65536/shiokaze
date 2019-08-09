@@ -64,7 +64,13 @@ private:
 	array2<float> m_array {this,"TargetArray:treearray2"};
 };
 //
-extern "C" module * create_instance() {
+#ifdef DLLEXPORT_TREEARRAY2EXAMPLE
+#define DLLAPI_TREEARRAY2EXAMPLE DLLAPI_EXPORT
+#else
+#define DLLAPI_TREEARRAY2EXAMPLE DLLAPI_IMPORT
+#endif
+
+extern "C" DLLAPI_TREEARRAY2EXAMPLE module * create_instance() {
 	return new treearray2_example;
 }
 //

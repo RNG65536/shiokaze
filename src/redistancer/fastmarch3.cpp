@@ -161,7 +161,13 @@ protected:
 	double m_dx;
 };
 //
-extern "C" module * create_instance() {
+#ifdef DLLEXPORT_FASTMARCH3
+#define DLLAPI_FASTMARCH3 DLLAPI_EXPORT
+#else
+#define DLLAPI_FASTMARCH3 DLLAPI_IMPORT
+#endif
+
+extern "C" DLLAPI_FASTMARCH3 module * create_instance() {
 	return new fastmarch3;
 }
 //

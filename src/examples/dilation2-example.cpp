@@ -109,7 +109,13 @@ private:
 	gridvisualizer2_driver m_gridvisualizer{this,"gridvisualizer2"};
 };
 //
-extern "C" module * create_instance() {
+#ifdef DLLEXPORT_DILATION2EXAMPLE
+#define DLLAPI_DILATION2EXAMPLE DLLAPI_EXPORT
+#else
+#define DLLAPI_DILATION2EXAMPLE DLLAPI_IMPORT
+#endif
+
+extern "C" DLLAPI_DILATION2EXAMPLE module * create_instance() {
 	return new dilation2;
 }
 //

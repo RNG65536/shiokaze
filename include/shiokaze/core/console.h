@@ -27,9 +27,18 @@
 //
 #include <shiokaze/core/common.h>
 #include <string>
+
+#include <shiokaze/dllapi.h>
 //
 SHKZ_BEGIN_NAMESPACE
 //
+
+#ifdef DLLEXPORT_CORE
+#define DLLAPI_CORE DLLAPI_EXPORT
+#else
+#define DLLAPI_CORE DLLAPI_IMPORT
+#endif
+
 /** @file */
 /// \~english @brief Namespace that helps executing commands, dumping messages, writing log files.
 /// \~japanese @brief ログファイルを書き出したり、メッセージを出力したり、コマンドの実行を支援するネームスペース。
@@ -42,7 +51,7 @@ namespace console {
 	 @param[in] format フォーマットされたコマンドの文字列。
 	 @return 結果の文字列。
 	 */
-	std::string run( std::string format, ...);
+    DLLAPI_CORE std::string run(std::string format, ...);
 	/**
 	 \~english @brief Excecute a command and get result.
 	 @param[in] foramt Formatted command string.
@@ -51,7 +60,7 @@ namespace console {
 	 @param[in] format フォーマットされたコマンドの文字列。
 	 @return 結果の整数値。
 	 */
-	int system( std::string format, ...);
+    DLLAPI_CORE int system(std::string format, ...);
 	/**
 	 \~english @brief Convert time duration to string
 	 @param[in] msec Time in milliseconds.
@@ -60,7 +69,7 @@ namespace console {
 	 @param[in] msec ミリセカンド秒。
 	 @return 変換された文字。
 	*/
-	std::string tstr(double msec);
+    DLLAPI_CORE std::string tstr(double msec);
 	/**
 	 \~english @brief Convert enumeration to string such as 1st, 2nd.
 	 @param[in] num Enumeration in integer.
@@ -69,7 +78,7 @@ namespace console {
 	 @param[in] num 列挙の数。
 	 @return 変換された文字。
 	*/
-	std::string nth(int num);
+    DLLAPI_CORE std::string nth(int num);
 	/**
 	 \~english @brief Convert byte size to string such as killo bytes and mega bytes.
 	 @param[in] bytes Byte size.
@@ -78,7 +87,7 @@ namespace console {
 	 @param[in] bytes バイトサイズ。
 	 @return 変換された文字。
 	*/
-	std::string size_str( size_t bytes );
+    DLLAPI_CORE std::string size_str(size_t bytes);
 	/**
 	 \~english @brief Format string with given arguments.
 	 @param[in] format format string.
@@ -87,35 +96,35 @@ namespace console {
 	 @param[in] format フォーマットの文字列。
 	 @return フォーマットされた文字。
 	*/
-	std::string format_str( std::string format, ...);
+    DLLAPI_CORE std::string format_str(std::string format, ...);
 	/**
 	 \~english @brief Set path to export log files.
 	 @param[in] path Path to export.
 	 \~japanese @brief ログファイルを出力するパスを設定する。
 	 @param[in] path URL:path 出力先のパス。
 	*/
-	void set_root_path( std::string path );
+    DLLAPI_CORE void set_root_path(std::string path);
 	/**
 	 \~english @brief Get path to export log files.
 	 @return If set, path to export. Empty string otherwise.
 	 \~japanese @brief ログファイルを出力するパスを取得する。
 	 @return もし設定されていれば、出力先のパス。そうでなければ、空白の文字列を返す。
 	*/
-	std::string get_root_path();
+    DLLAPI_CORE std::string get_root_path();
 	/**
 	 \~english @brief Print a log message in a single line.
 	 @param[in] format Message to print.
 	 \~japanese @brief 一行にログメッセージを出力する。
 	 @param[in] format 出力するメッセージ。
 	*/
-	void dump(std::string format, ...);
+    DLLAPI_CORE void dump(std::string format, ...);
 	/**
 	 \~english @brief Set a time for logging.
 	 @param[in] time Time to set. Typically in milliseconds.
 	 \~japanese @brief シミュレーションの時間をログに記録する。
 	 @param[in] time 設定する時間。主に、ミリセカンド秒を想定。
 	*/
-	void set_time( double time );
+    DLLAPI_CORE void set_time(double time);
 	/**
 	 \~english @brief Export number associated with the name as log file.
 	 @param[in] name Name associated with the number.
@@ -124,8 +133,8 @@ namespace console {
 	 @param[in] name 数字に関連した名前。
 	 @param[in] number ログファイルに記録する数字。
 	*/
-	void write( std::string name, double number );
-}
+    DLLAPI_CORE void write(std::string name, double number);
+    }
 //
 SHKZ_END_NAMESPACE
 //

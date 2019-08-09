@@ -27,7 +27,14 @@
 //
 SHKZ_USING_NAMESPACE
 //
-class convexhullrasterizer2 : public particlerasterizer2_interface {
+
+#ifdef DLLEXPORT_CONVEXHULLRASTERIZER2
+#define DLLAPI_CONVEXHULLRASTERIZER2 DLLAPI_EXPORT
+#else
+#define DLLAPI_CONVEXHULLRASTERIZER2 DLLAPI_IMPORT
+#endif
+
+class DLLAPI_CONVEXHULLRASTERIZER2 convexhullrasterizer2 : public particlerasterizer2_interface {
 protected:
 	//
 	LONG_NAME("Convex Hull Rasterizer 2D")
@@ -87,7 +94,7 @@ protected:
 				out_of_bound = false;
 				max_phi = 1e9;
 				const Particle2 *pairs[] = { &p0, &p1 };
-				for( uint n=0; n<2; n++ ) {
+				for( unsigned int n=0; n<2; n++ ) {
 					double phi = getParticleConvextHullLevelsetSphere(p,*pairs[n]);
 					if( phi < max_phi ) {
 						max_phi = phi;
@@ -146,7 +153,7 @@ protected:
 	double m_dx;
 };
 //
-extern "C" module * create_instance() {
+extern "C" DLLAPI_CONVEXHULLRASTERIZER2 module * create_instance() {
 	return new convexhullrasterizer2();
 }
 //

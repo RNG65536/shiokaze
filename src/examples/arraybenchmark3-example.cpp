@@ -131,7 +131,13 @@ private:
 	double m_dx;
 };
 //
-extern "C" module * create_instance() {
+#ifdef DLLEXPORT_ARRAYBENCHMARK3EXAMPLE
+#define DLLAPI_ARRAYBENCHMARK3EXAMPLE DLLAPI_EXPORT
+#else
+#define DLLAPI_ARRAYBENCHMARK3EXAMPLE DLLAPI_IMPORT
+#endif
+
+extern "C" DLLAPI_ARRAYBENCHMARK3EXAMPLE module * create_instance() {
 	return new arraybenchmark3;
 }
 //

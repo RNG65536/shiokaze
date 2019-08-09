@@ -286,7 +286,13 @@ protected:
 	vec3d m_bb0, m_bb1;
 };
 //
-extern "C" module * create_instance() {
+#ifdef DLLEXPORT_CAMERA3
+#define DLLAPI_CAMERA3 DLLAPI_EXPORT
+#else
+#define DLLAPI_CAMERA3 DLLAPI_IMPORT
+#endif
+
+extern "C" DLLAPI_CAMERA3 module * create_instance() {
 	return new camera3();
 }
 //

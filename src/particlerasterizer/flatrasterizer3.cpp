@@ -30,7 +30,14 @@
 //
 SHKZ_USING_NAMESPACE
 //
-class flatrasterizer3 : public particlerasterizer3_interface {
+
+#ifdef DLLEXPORT_FLATRASTERIZER3
+#define DLLAPI_FLATRASTERIZER3 DLLAPI_EXPORT
+#else
+#define DLLAPI_FLATRASTERIZER3 DLLAPI_IMPORT
+#endif
+
+class DLLAPI_FLATRASTERIZER3 flatrasterizer3 : public particlerasterizer3_interface {
 protected:
 	//
 	LONG_NAME("Flat Rasterizer 3D")
@@ -98,7 +105,7 @@ protected:
 	double m_dx;
 };
 //
-extern "C" module * create_instance() {
+extern "C" DLLAPI_FLATRASTERIZER3 module * create_instance() {
 	return new flatrasterizer3();
 }
 //

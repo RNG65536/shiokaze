@@ -293,7 +293,13 @@ protected:
 	parallel_driver m_parallel{this};
 };
 //
-extern "C" module * create_instance() {
+#ifdef DLLEXPORT_MACUTILITY2
+#define DLLAPI_MACUTILITY2 DLLAPI_EXPORT
+#else
+#define DLLAPI_MACUTILITY2 DLLAPI_IMPORT
+#endif
+
+extern "C" DLLAPI_MACUTILITY2 module * create_instance() {
 	return new macutility2();
 }
 //

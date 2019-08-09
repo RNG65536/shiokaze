@@ -230,7 +230,7 @@ void macflipliquid2::draw( graphics_engine &g ) const {
 	m_macvisualizer->draw_velocity(g,m_velocity);
 }
 //
-extern "C" module * create_instance() {
+extern "C" DLLAPI_MACFLIPLIQUID2 module * create_instance() {
 	return new macflipliquid2;
 }
 //

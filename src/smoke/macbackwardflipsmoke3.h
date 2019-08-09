@@ -30,7 +30,14 @@
 //
 SHKZ_BEGIN_NAMESPACE
 //
-class macbackwardflipsmoke3 : public macsmoke3 {
+
+#ifdef DLLEXPORT_MACBACKWARDFLIPSMOKE3
+#define DLLAPI_MACBACKWARDFLIPSMOKE3 DLLAPI_EXPORT
+#else
+#define DLLAPI_MACBACKWARDFLIPSMOKE3 DLLAPI_IMPORT
+#endif
+
+class DLLAPI_MACBACKWARDFLIPSMOKE3 macbackwardflipsmoke3 : public macsmoke3 {
 public:
 	macbackwardflipsmoke3();
 	virtual ~macbackwardflipsmoke3() {}

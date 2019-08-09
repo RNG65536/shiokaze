@@ -922,7 +922,13 @@ protected:
 	//
 };
 //
-extern "C" module * create_instance() {
+#ifdef DLLEXPORT_MACSTREAMFUNCSOLVER3
+#define DLLAPI_MACSTREAMFUNCSOLVER3 DLLAPI_EXPORT
+#else
+#define DLLAPI_MACSTREAMFUNCSOLVER3 DLLAPI_IMPORT
+#endif
+
+extern "C" DLLAPI_MACSTREAMFUNCSOLVER3 module * create_instance() {
 	return new macstreamfuncsolver3();
 }
 //

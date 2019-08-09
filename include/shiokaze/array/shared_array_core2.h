@@ -27,13 +27,23 @@
 //
 #include <shiokaze/array/shape.h>
 #include <functional>
+
+#include <shiokaze/dllapi.h>
 //
 SHKZ_BEGIN_NAMESPACE
 //
+
+#ifdef DLLEXPORT_CORE
+#define DLLAPI_CORE DLLAPI_EXPORT
+#else
+#define DLLAPI_CORE DLLAPI_IMPORT
+#endif
+
 /** @file */
 /// \~english @brief Abstract storage class that enables sharing pre-allocated arrays.
 /// \~japanese @brief 事前に確保されたグリッドの共有を可能にする抽象クラス。
-class shared_array_core2 {
+class DLLAPI_CORE shared_array_core2
+{
 public:
 	/**
 	 \~english @brief Borrow a shared array.

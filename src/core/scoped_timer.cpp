@@ -25,7 +25,8 @@
 #include <shiokaze/core/console.h>
 #include <shiokaze/core/scoped_timer.h>
 #include <shiokaze/core/global_timer.h>
-#include <sys/time.h>
+//#include <sys/time.h>
+#include <chrono>
 #include <cstring>
 #include <cassert>
 //

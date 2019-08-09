@@ -27,7 +27,14 @@
 //
 SHKZ_BEGIN_NAMESPACE
 //
-class bitcount {
+
+#ifdef DLLEXPORT_BITCOUNT
+#define DLLAPI_BITCOUNT DLLAPI_EXPORT
+#else
+#define DLLAPI_BITCOUNT DLLAPI_IMPORT
+#endif
+
+class DLLAPI_BITCOUNT bitcount {
 public:
 	static size_t count( const unsigned char *bit_mask, size_t bit_mask_size, const parallel_driver *parallel );
 };

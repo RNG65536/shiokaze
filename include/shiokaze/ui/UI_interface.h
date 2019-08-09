@@ -27,6 +27,10 @@
 //
 #include <shiokaze/graphics/graphics_engine.h>
 //
+#undef MOD_SHIFT
+#undef MOD_CONTROL
+#undef MOD_ALT
+
 SHKZ_BEGIN_NAMESPACE
 //
 /** @file */

@@ -43,13 +43,23 @@ printf( "Next deadline: %s, %d days.\n", name.c_str(), days );
 #include <vector>
 #include <string>
 #include <shiokaze/core/common.h>
+
+#include <shiokaze/dllapi.h>
 //
 SHKZ_BEGIN_NAMESPACE
 //
+
+#ifdef DLLEXPORT_CORE
+#define DLLAPI_CORE DLLAPI_EXPORT
+#else
+#define DLLAPI_CORE DLLAPI_IMPORT
+#endif
+
 /** @file */
 /// \~english @brief Class that tells you the next deadline.
 /// \~japanese @brief 次の〆切を伝えてくれるクラス。
-class deadline {
+class DLLAPI_CORE deadline
+{
 public:
 	/**
 	 \~english @brief Add a new deadline.

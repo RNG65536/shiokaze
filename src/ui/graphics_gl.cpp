@@ -24,6 +24,10 @@
 //
 #include "graphics_gl.h"
 #include <cstdio>
+#include <cassert>
+
+#undef near
+#undef far
 //
 SHKZ_USING_NAMESPACE
 //
@@ -122,12 +126,17 @@ void graphics_gl::vertex3v( const double *v ) {
 }
 //
 void graphics_gl::draw_string( const double *v, std::string str ) const {
+#if 0
 	const char *str_ptr = str.c_str();
 	glRasterPos3dv(v);
 	auto font = GLUT_BITMAP_HELVETICA_10;
 	if( m_HiDPI_factor > 1.2 ) font = GLUT_BITMAP_HELVETICA_12;
 	if( m_HiDPI_factor > 1.8 ) font = GLUT_BITMAP_HELVETICA_18;
 	while (*str_ptr) glutBitmapCharacter(font, *str_ptr++);
+#else
+    auto window = glfwGetCurrentContext();
+    glfwSetWindowTitle(window, str.c_str());
+#endif
 }
 //
 double graphics_gl::get_HiDPI_scaling_factor() const {

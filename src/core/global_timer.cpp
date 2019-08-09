@@ -25,7 +25,8 @@
 #include <shiokaze/core/console.h>
 #include <shiokaze/core/global_timer.h>
 #include <cassert>
-#include <sys/time.h>
+//#include <sys/time.h>
+#include <chrono>
 //
 SHKZ_USING_NAMESPACE
 //
@@ -51,10 +52,15 @@ double global_timer::get_milliseconds() {
 	if( g_pause_counter ) {
 		return g_pause_time;
 	} else {
-		struct timeval tv;
-		gettimeofday(&tv,nullptr);
-		double mtime = tv.tv_sec * 1000000 + tv.tv_usec;
-		return mtime / 1000.0 - g_accumulated_time;
+		//struct timeval tv;
+		//gettimeofday(&tv,nullptr);
+		//double mtime = tv.tv_sec * 1000000 + tv.tv_usec;
+		//return mtime / 1000.0 - g_accumulated_time;
+        static auto begin = std::chrono::steady_clock::now();
+        auto        end = std::chrono::steady_clock::now();
+        auto        duration =
+            std::chrono::duration_cast<std::chrono::microseconds>(end - begin);
+        return double(duration.count()) / 1000.0 - g_accumulated_time;
 	}
 }
 //

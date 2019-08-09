@@ -1,0 +1,10 @@
+add_library(stdthread STATIC ${headers} stdthread.cpp)
+add_library(tbbthread STATIC ${headers} tbbthread.cpp)
+add_library(sequential_splitter STATIC ${headers} sequential_splitter.cpp)
+add_library(dispersed_splitter STATIC ${headers} dispersed_splitter.cpp)
+
+target_link_libraries(stdthread core)
+target_link_libraries(tbbthread core ${Tbb_LIBRARIES})
+target_compile_definitions(tbbthread PUBLIC "__TBB_NO_IMPLICIT_LINKAGE")
+target_link_libraries(sequential_splitter core)
+target_link_libraries(dispersed_splitter core)

@@ -282,7 +282,13 @@ protected:
 	//
 };
 //
-extern "C" module * create_instance() {
+#ifdef DLLEXPORT_GRIDVISUALIZER2
+#define DLLAPI_GRIDVISUALIZER2 DLLAPI_EXPORT
+#else
+#define DLLAPI_GRIDVISUALIZER2 DLLAPI_IMPORT
+#endif
+
+extern "C" DLLAPI_GRIDVISUALIZER2 module * create_instance() {
 	return new gridvisualizer2();
 }
 //

@@ -102,7 +102,13 @@ private:
 	std::vector<unsigned char> m_data;
 };
 //
-extern "C" module * create_instance() {
+#ifdef DLLEXPORT_IMAGEIO
+#define DLLAPI_IMAGEIO DLLAPI_EXPORT
+#else
+#define DLLAPI_IMAGEIO DLLAPI_IMPORT
+#endif
+
+extern "C" DLLAPI_IMAGEIO module * create_instance() {
 	return new image_io;
 }
 //

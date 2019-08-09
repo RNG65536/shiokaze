@@ -555,10 +555,10 @@ int ui::run ( int argc, const char* argv[] ) {
 	cpu_name = console::run("sysctl -n machdep.cpu.brand_string");
 	cpu_trim = 0;
 #else
-	cpu_name = console::run("cat /proc/cpuinfo | grep 'model name' | uniq");
-	cpu_trim = cpu_name.find(":")+2;
+	//cpu_name = console::run("cat /proc/cpuinfo | grep 'model name' | uniq");
+	//cpu_trim = cpu_name.find(":")+2;
 #endif
-	cpu_name = cpu_name.substr(0,cpu_name.size()-1);
+	//cpu_name = cpu_name.substr(0,cpu_name.size()-1);
 	//
 	const char *compiler_name (nullptr);
 #if defined(__clang__)
@@ -575,15 +575,15 @@ int ui::run ( int argc, const char* argv[] ) {
 #endif
 	//
 	auto remove_fold_character = [&]( std::string &str ) { str.erase(std::remove(str.begin(),str.end(),'\n'),str.end()); };
-	std::string git_version = console::run("git describe --tags --always"); remove_fold_character(git_version);
-	std::string get_current_branch_name = console::run("git rev-parse --abbrev-ref HEAD"); remove_fold_character(get_current_branch_name);
+	//std::string git_version = console::run("git describe --tags --always"); remove_fold_character(git_version);
+	//std::string get_current_branch_name = console::run("git rev-parse --abbrev-ref HEAD"); remove_fold_character(get_current_branch_name);
 	//
 	console::dump( "   CPU = <Cyan>%s<Default>\n", cpu_name.size() > cpu_trim ? cpu_name.substr(cpu_trim,cpu_name.size()).c_str() : "(Unknown)");
 	console::dump( "   Display availability = %s\n", has_display ? "Yes" : "No" );
-	console::dump( "   %s version = <Cyan>%d.%d.%d<Default>\n",compiler_name, __GNUC__, __GNUC_MINOR__, __GNUC_PATCHLEVEL__ );
-	console::dump( "   Build target = <Cyan>%s<Default>\n", SHKZ_BUILD_TARGET );
+	//console::dump( "   %s version = <Cyan>%d.%d.%d<Default>\n",compiler_name, __GNUC__, __GNUC_MINOR__, __GNUC_PATCHLEVEL__ );
+	//console::dump( "   Build target = <Cyan>%s<Default>\n", SHKZ_BUILD_TARGET );
 	console::dump( "   Available cores = <Cyan>%d<Default>\n", std::thread::hardware_concurrency() );
-	console::dump( "   Git version = %s-%s\n", get_current_branch_name.c_str(),git_version.c_str());
+	//console::dump( "   Git version = %s-%s\n", get_current_branch_name.c_str(),git_version.c_str());
 	//
 	// Set whether we use OpenGL engine
 	bool use_OpenGL;
@@ -620,7 +620,8 @@ int ui::run ( int argc, const char* argv[] ) {
 		userinterface.load(config);
 		//
 #ifdef USE_OPENGL
-		::glutInit(&argc,(char **)argv);
+		//::glutInit(&argc,(char **)argv);
+		::glewInit();
 #endif
 		//
 		userinterface.configure(config);
@@ -688,6 +689,7 @@ int ui::run ( int argc, const char* argv[] ) {
 	return 0;
 }
 //
-extern "C" int run( int argc, const char* argv[] ) {
+extern "C" DLLAPI_UI int run(int argc, const char* argv[])
+{
 	return ui::run(argc,argv);
 }

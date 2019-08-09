@@ -71,7 +71,7 @@ public:
 		std::vector<vec3i> result;
 		result.assign(assembled.begin(),assembled.end());
 		//
-		std::vector<active_state3> active_states[parallel.get_thread_num()];
+		std::vector<std::vector<active_state3> > active_states(parallel.get_thread_num());
 		parallel.for_each(result.size(),[&]( size_t q, int thread_index ) {
 			vec3i pi = result[q];
 			bool active (false);

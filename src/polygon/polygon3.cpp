@@ -143,7 +143,13 @@ protected:
 	std::vector<std::vector<size_t> > m_faces;
 };
 //
-extern "C" module * create_instance() {
+#ifdef DLLEXPORT_POLYGON3
+#define DLLAPI_POLYGON3 DLLAPI_EXPORT
+#else
+#define DLLAPI_POLYGON3 DLLAPI_IMPORT
+#endif
+
+extern "C" DLLAPI_POLYGON3 module * create_instance() {
 	return new polygon3();
 }
 //

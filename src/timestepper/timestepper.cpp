@@ -199,7 +199,13 @@ protected:
 	//
 };
 //
-extern "C" module * create_instance() {
+#ifdef DLLEXPORT_TIMESTEPPER
+#define DLLAPI_TIMESTEPPER DLLAPI_EXPORT
+#else
+#define DLLAPI_TIMESTEPPER DLLAPI_IMPORT
+#endif
+
+extern "C" DLLAPI_TIMESTEPPER module * create_instance() {
 	return new timestepper();
 }
 //

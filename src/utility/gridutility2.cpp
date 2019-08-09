@@ -34,6 +34,11 @@
 #include <stack>
 #define _USE_MATH_DEFINES
 #include <cmath>
+
+#ifndef M_PI
+const double M_PI = 3.1415926535897932384626433832795;
+#endif
+
 //
 SHKZ_USING_NAMESPACE
 //
@@ -241,7 +246,13 @@ protected:
 	shape2 m_shape;
 };
 //
-extern "C" module * create_instance() {
+#ifdef DLLEXPORT_GRIDUTILITY2
+#define DLLAPI_GRIDUTILITY2 DLLAPI_EXPORT
+#else
+#define DLLAPI_GRIDUTILITY2 DLLAPI_IMPORT
+#endif
+
+extern "C" DLLAPI_GRIDUTILITY2 module * create_instance() {
 	return new gridutility2();
 }
 //

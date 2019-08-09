@@ -29,6 +29,7 @@
 #include <shiokaze/math/vec.h>
 #include <vector>
 #include <string>
+#include <algorithm>
 //
 SHKZ_BEGIN_NAMESPACE
 //
@@ -77,7 +78,7 @@ public:
 			vec3d min_v(1e18,1e18,1e18);
 			vec3d max_v = -1.0 * min_v;
 			for( size_t n=0; n<nvertices; n++ ) {
-				for( uint dim=0; dim<DIM3; dim++ ) {
+				for( unsigned int dim=0; dim<DIM3; dim++ ) {
 					min_v[dim] = std::min(vertices[n][dim],min_v[dim]);
 					max_v[dim] = std::max(vertices[n][dim],max_v[dim]);
 				}

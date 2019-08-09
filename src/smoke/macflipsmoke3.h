@@ -30,7 +30,14 @@
 //
 SHKZ_BEGIN_NAMESPACE
 //
-class macflipsmoke3 : public macsmoke3 {
+
+#ifdef DLLEXPORT_MACFLIPSMOKE3
+#define DLLAPI_MACFLIPSMOKE3 DLLAPI_EXPORT
+#else
+#define DLLAPI_MACFLIPSMOKE3 DLLAPI_IMPORT
+#endif
+
+class DLLAPI_MACFLIPSMOKE3 macflipsmoke3 : public macsmoke3 {
 public:
 	//
 	macflipsmoke3();

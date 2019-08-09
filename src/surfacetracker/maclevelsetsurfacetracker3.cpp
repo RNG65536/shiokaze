@@ -206,7 +206,13 @@ protected:
 	Parameters m_param;
 };
 //
-extern "C" module * create_instance() {
+#ifdef DLLEXPORT_MACLEVELSETSURFACETRACKER3
+#define DLLAPI_MACLEVELSETSURFACETRACKER3 DLLAPI_EXPORT
+#else
+#define DLLAPI_MACLEVELSETSURFACETRACKER3 DLLAPI_IMPORT
+#endif
+
+extern "C" DLLAPI_MACLEVELSETSURFACETRACKER3 module * create_instance() {
 	return new maclevelsetsurfacetracker3();
 }
 //

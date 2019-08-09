@@ -27,7 +27,14 @@
 //
 SHKZ_USING_NAMESPACE
 //
-class convexhullrasterizer3 : public particlerasterizer3_interface {
+
+#ifdef DLLEXPORT_CONVEXHULLRASTERIZER3
+#define DLLAPI_CONVEXHULLRASTERIZER3 DLLAPI_EXPORT
+#else
+#define DLLAPI_CONVEXHULLRASTERIZER3 DLLAPI_IMPORT
+#endif
+
+class DLLAPI_CONVEXHULLRASTERIZER3 convexhullrasterizer3 : public particlerasterizer3_interface {
 protected:
 	//
 	LONG_NAME("Convex Hull Rasterizer 3D")
@@ -235,7 +242,7 @@ protected:
 };
 //
 //
-extern "C" module * create_instance() {
+extern "C" DLLAPI_CONVEXHULLRASTERIZER3 module * create_instance() {
 	return new convexhullrasterizer3();
 }
 //

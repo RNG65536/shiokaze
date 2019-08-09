@@ -78,7 +78,13 @@ protected:
 	Parameters m_param;
 };
 //
-extern "C" module * create_instance() {
+#ifdef DLLEXPORT_CG
+#define DLLAPI_CG DLLAPI_EXPORT
+#else
+#define DLLAPI_CG DLLAPI_IMPORT
+#endif
+
+extern "C" DLLAPI_CG module * create_instance() {
 	return new cg_solver<INDEX_TYPE,FLOAT_TYPE>();
 }
 //

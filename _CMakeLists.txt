@@ -1,0 +1,39 @@
+cmake_minimum_required(VERSION 3.12)
+project(shiokaze_sim)
+
+list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
+
+set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/bin)
+set(LIBRARY_OUTPUT_PATH ${CMAKE_BINARY_DIR}/bin)
+
+add_compile_definitions("BOOST_ALL_DYN_LINK" "__TBB_NO_IMPLICIT_LINKAGE")
+
+add_compile_definitions("SHKZ_DEBUG=1" "SHKZ_SUFFIX=\"_debug\"" "NUM_THREAD=8" "USE_OPENGL=1" "BOOST_ALL_DYN_LINK" "__TBB_NO_IMPLICIT_LINKAGE")
+
+#add_compile_definitions("SHKZ_DEBUG=1" "SHKZ_SUFFIX=\"_debug\"" "NUM_THREAD=4" "USE_OPENGL=1" "BOOST_ALL_DYN_LINK" "SPATIAL_DIM=2")
+#add_compile_options("-std=c++14")
+
+find_package(OpenGL REQUIRED)
+find_package(glfw3 REQUIRED)
+find_package(glew REQUIRED)
+find_package(Boost REQUIRED COMPONENTS filesystem system date_time)
+find_package(gsl REQUIRED)
+find_package(zlib REQUIRED)
+find_package(TBB REQUIRED)
+
+include_directories(
+    ${CMAKE_SOURCE_DIR}/src
+    ${CMAKE_SOURCE_DIR}/include
+    ${CMAKE_SOURCE_DIR}/local/include
+    ${Boost_INCLUDE_DIRS}
+    ${GLEW_INCLUDE_DIR}
+    ${GSL_INCLUDE_DIRS}
+    ${ZLIB_INCLUDE_DIRS}
+    ${Tbb_INCLUDE_DIRS}
+    )
+
+file(GLOB_RECURSE headers "include/*.h")
+
+add_subdirectory(src)
+add_subdirectory(launcher)
+

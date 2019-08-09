@@ -204,7 +204,13 @@ protected:
 	double m_dx;
 };
 //
-extern "C" module * create_instance() {
+#ifdef DLLEXPORT_PDEREDISTANCER3
+#define DLLAPI_PDEREDISTANCER3 DLLAPI_EXPORT
+#else
+#define DLLAPI_PDEREDISTANCER3 DLLAPI_IMPORT
+#endif
+
+extern "C" DLLAPI_PDEREDISTANCER3 module * create_instance() {
 	return new pderedistancer3;
 }
 //

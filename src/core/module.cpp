@@ -52,8 +52,9 @@ struct record_set {
 };
 static record_set asset;
 static std::string simplify( std::string path ) {
-	std::string prefix ("libshiokaze_");
-	return path.substr(path.find(prefix)+prefix.length());
+	//std::string prefix ("libshiokaze_");
+	//return path.substr(path.find(prefix)+prefix.length());
+    return path;
 }
 //
 module::module() {}
@@ -97,7 +98,8 @@ unsigned module::close_all_handles () {
 }
 //
 std::string module::module_libpath( std::string module_name ) {
-	return filesystem::resolve_libname(std::string("shiokaze_")+module_name);
+	//return filesystem::resolve_libname(std::string("shiokaze_")+module_name);
+	return filesystem::resolve_libname(module_name);
 }
 //
 module * module::alloc_module( configuration &config, std::string arg_name, std::string default_module_name, std::string description ) {

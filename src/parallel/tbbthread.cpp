@@ -65,7 +65,13 @@ protected:
 	//
 };
 //
-extern "C" module * create_instance() {
+#ifdef DLLEXPORT_TBBTHREAD
+#define DLLAPI_TBBTHREAD DLLAPI_EXPORT
+#else
+#define DLLAPI_TBBTHREAD DLLAPI_IMPORT
+#endif
+
+extern "C" DLLAPI_TBBTHREAD module * create_instance() {
 	return new tbbthread();
 }
 //

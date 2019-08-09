@@ -70,11 +70,11 @@ protected:
 	virtual void configure ( configuration &config ) override {
 		cmdparser parser(config.get_dictionary());
 		arg_str = parser.get_arg_string();
-		if( console::system("gnuplot -V > /dev/null 2>&1") == 0 ) {
-			plot_template = "cd %s/record; ./plot.sh > /dev/null 2>&1";
-		} else {
+		//if( console::system("gnuplot -V > /dev/null 2>&1") == 0 ) {
+		//	plot_template = "cd %s/record; ./plot.sh > /dev/null 2>&1";
+		//} else {
 			plot_template = "";
-		}
+		//}
 		config.get_string("PlotTemplate",plot_template,"Plot command template");
 	}
 	//
@@ -83,7 +83,13 @@ private:
 	std::string plot_template;
 };
 //
-extern "C" module * create_instance() {
+#ifdef DLLEXPORT_SYSSTATS
+#define DLLAPI_SYSSTATS DLLAPI_EXPORT
+#else
+#define DLLAPI_SYSSTATS DLLAPI_IMPORT
+#endif
+
+extern "C" DLLAPI_SYSSTATS module * create_instance() {
 	return new sysstats();
 }
 //

@@ -37,6 +37,11 @@
 #include "../cellmesher/mc_table.h"
 #define _USE_MATH_DEFINES
 #include <cmath>
+
+#ifndef M_PI
+const double M_PI = 3.1415926535897932384626433832795;
+#endif
+
 //
 SHKZ_USING_NAMESPACE
 //
@@ -388,7 +393,13 @@ protected:
 	shape3 m_shape;
 };
 //
-extern "C" module * create_instance() {
+#ifdef DLLEXPORT_GRIDUTILITY3
+#define DLLAPI_GRIDUTILITY3 DLLAPI_EXPORT
+#else
+#define DLLAPI_GRIDUTILITY3 DLLAPI_IMPORT
+#endif
+
+extern "C" DLLAPI_GRIDUTILITY3 module * create_instance() {
 	return new gridutility3();
 }
 //

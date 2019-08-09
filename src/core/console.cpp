@@ -44,7 +44,9 @@ static double g_time {0.0};
 //
 namespace console {
 	//
-	std::string run( std::string format, ...) {
+    DLLAPI_CORE std::string run(std::string format, ...)
+    {
+#if 0
 		va_list args;
 		va_start(args,format);
 		vsnprintf(g_buffer,MAX_BUFFER_SIZE,format.c_str(),args);
@@ -59,9 +61,13 @@ namespace console {
 		}
 		pclose(pipe);
 		return result;
+#endif
+        assert(false);
+		return "";
 	}
 	//
-	int system( std::string format, ...) {
+    DLLAPI_CORE int system(std::string format, ...)
+    {
 		va_list args;
 		va_start(args,format);
 		vsnprintf(g_buffer,MAX_BUFFER_SIZE,format.c_str(),args);
@@ -69,7 +75,8 @@ namespace console {
 		return ::system(g_buffer);
 	}
 	//
-	std::string tstr(double msec) {
+    DLLAPI_CORE std::string tstr(double msec)
+    {
 		if( msec < 1000.0 ) {
 			// Milli seconds
 			snprintf(g_buffer,MAX_BUFFER_SIZE,"%.2f msec",msec);
@@ -89,7 +96,8 @@ namespace console {
 		return g_buffer;
 	}
 	//
-	std::string nth(int num) {
+    DLLAPI_CORE std::string nth(int num)
+    {
 		switch(num) {
 			case 0:
 				snprintf(g_buffer,MAX_BUFFER_SIZE,"0th");
@@ -110,7 +118,8 @@ namespace console {
 		return g_buffer;
 	}
 	//
-	std::string size_str( size_t bytes ) {
+    DLLAPI_CORE std::string size_str(size_t bytes)
+    {
 		g_buffer[0]=0;
 		if( bytes < 1024 ) {
 			snprintf(g_buffer,MAX_BUFFER_SIZE,"%d bytes",(int)bytes);
@@ -131,7 +140,8 @@ namespace console {
 		return g_buffer;
 	}
 	//
-	std::string format_str( std::string format, ...) {
+    DLLAPI_CORE std::string format_str(std::string format, ...)
+    {
 		va_list args;
 		va_start(args,format);
 		vsnprintf(g_buffer,MAX_BUFFER_SIZE,format.c_str(),args);
@@ -155,15 +165,18 @@ namespace console {
 		}
 	}
 	//
-	void set_root_path( std::string path ) {
+    DLLAPI_CORE void set_root_path(std::string path)
+    {
 		g_root_path = path;
 	}
 	//
-	std::string get_root_path() {
+    DLLAPI_CORE std::string get_root_path()
+    {
 		return g_root_path;
 	}
 	//
-	void dump(std::string format, ...) {
+    DLLAPI_CORE void dump(std::string format, ...)
+    {
 		//
 		static bool ended_with_return (false);
 		std::lock_guard<std::mutex> guard(g_console_mutex);
@@ -253,10 +266,12 @@ namespace console {
 		global_timer::resume();
 	}
 	//
-	void set_time ( double time ) {
+    DLLAPI_CORE void set_time(double time)
+    {
 		g_time = time;
 	}
-	void write( std::string name, double number ) {
+    DLLAPI_CORE void write(std::string name, double number)
+    {
 		if( ! g_root_path.empty()) {
 			std::lock_guard<std::mutex> guard(g_console_mutex);
 			static bool firstTime = true;

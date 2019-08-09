@@ -29,6 +29,11 @@
 #include <shiokaze/graphics/graphics_engine.h>
 #include <shiokaze/core/console.h>
 #include <shiokaze/math/vec.h>
+
+#ifndef M_PI
+const double M_PI = 3.1415926535897932384626433832795;
+#endif
+
 //
 SHKZ_BEGIN_NAMESPACE
 //

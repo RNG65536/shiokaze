@@ -73,7 +73,13 @@ private:
 	}
 };
 //
-extern "C" module * create_instance() {
+#ifdef DLLEXPORT_MESHUTILITY2
+#define DLLAPI_MESHUTILITY2 DLLAPI_EXPORT
+#else
+#define DLLAPI_MESHUTILITY2 DLLAPI_IMPORT
+#endif
+
+extern "C" DLLAPI_MESHUTILITY2 module * create_instance() {
 	return new meshutility2();
 }
 //

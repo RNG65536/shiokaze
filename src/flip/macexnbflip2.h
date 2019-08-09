@@ -29,7 +29,14 @@
 //
 SHKZ_BEGIN_NAMESPACE
 //
-class macexnbflip2 : public macnbflip2 {
+
+#ifdef DLLEXPORT_MACEXNBFLIP2
+#define DLLAPI_MACEXNBFLIP2 DLLAPI_EXPORT
+#else
+#define DLLAPI_MACEXNBFLIP2 DLLAPI_IMPORT
+#endif
+
+class DLLAPI_MACEXNBFLIP2 macexnbflip2 : public macnbflip2 {
 protected:
 	//
 	LONG_NAME("MAC Extended Narrowband FLIP 2D")

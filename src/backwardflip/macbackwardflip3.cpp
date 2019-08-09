@@ -658,7 +658,7 @@ void macbackwardflip3::draw( graphics_engine &g ) const {
 	}
 }
 //
-extern "C" module * create_instance() {
+extern "C" DLLAPI_MACBACKWARDFLIP3 module * create_instance() {
 	return new macbackwardflip3;
 }
 //

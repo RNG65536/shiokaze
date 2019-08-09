@@ -119,7 +119,7 @@ void macbackwardflipsmoke2::draw( graphics_engine &g ) const {
 	m_backwardflip->draw(g);
 }
 //
-extern "C" module * create_instance() {
+extern "C" DLLAPI_MACBACKWARDFLIPSMOKE2 module * create_instance() {
 	return new macbackwardflipsmoke2;
 }
 //

@@ -28,13 +28,23 @@
 #include <string>
 #include <stack>
 #include <shiokaze/core/credit.h>
+
+#include <shiokaze/dllapi.h>
 //
 SHKZ_BEGIN_NAMESPACE
 //
+
+#ifdef DLLEXPORT_CORE
+#define DLLAPI_CORE DLLAPI_EXPORT
+#else
+#define DLLAPI_CORE DLLAPI_IMPORT
+#endif
+
 /** @file */
 /// \~english @brief Timer designed to calculate the timings within scope.
 /// \~japanese @brief スコープの中の処理の時間を計測するクラス。
-class scoped_timer {
+class DLLAPI_CORE scoped_timer
+{
 public:
 	/**
 	 \~english @brief Cnstructor.

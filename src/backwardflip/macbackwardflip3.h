@@ -33,7 +33,14 @@
 //
 SHKZ_BEGIN_NAMESPACE
 //
-class macbackwardflip3 : public macbackwardflip3_interface {
+
+#ifdef DLLEXPORT_MACBACKWARDFLIP3
+#define DLLAPI_MACBACKWARDFLIP3 DLLAPI_EXPORT
+#else
+#define DLLAPI_MACBACKWARDFLIP3 DLLAPI_IMPORT
+#endif
+
+class DLLAPI_MACBACKWARDFLIP3 macbackwardflip3 : public macbackwardflip3_interface {
 protected:
 	//
 	MODULE_NAME("macbackwardflip3")

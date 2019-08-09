@@ -33,6 +33,11 @@
 #include <shiokaze/graphics/graphics_utility.h>
 #include <shiokaze/utility/utility.h>
 #include <algorithm>
+
+//#ifndef M_PI
+//const double M_PI = 3.1415926535897932384626433832795;
+//#endif
+
 //
 SHKZ_USING_NAMESPACE
 //
@@ -755,7 +760,7 @@ void macnbflip2::draw( graphics_engine &g, double time ) const {
 	}
 }
 //
-extern "C" module * create_instance() {
+extern "C" DLLAPI_MACNBFLIP2 module * create_instance() {
 	return new macnbflip2();
 }
 //

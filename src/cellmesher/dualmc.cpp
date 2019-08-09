@@ -74,7 +74,13 @@ protected:
 };
 //
 //
-extern "C" module * create_instance() {
+#ifdef DLLEXPORT_DUALMC
+#define DLLAPI_DUALMC DLLAPI_EXPORT
+#else
+#define DLLAPI_DUALMC DLLAPI_IMPORT
+#endif
+
+extern "C" DLLAPI_DUALMC module * create_instance() {
 	return new dualmc_wrapper;
 }
 //

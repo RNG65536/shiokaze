@@ -25,13 +25,23 @@
 #ifndef SHKZ_GLOBAL_TIMER_H
 #define SHKZ_GLOBAL_TIMER_H
 #include <shiokaze/core/common.h>
+
+#include <shiokaze/dllapi.h>
 //
 SHKZ_BEGIN_NAMESPACE
 //
+
+#ifdef DLLEXPORT_CORE
+#define DLLAPI_CORE DLLAPI_EXPORT
+#else
+#define DLLAPI_CORE DLLAPI_IMPORT
+#endif
+
 /** @file */
 /// \~english @brief Class that deals with global timings.
 /// \~japanese @brief グローバルなタイマーを管理するクラス。
-class global_timer {
+class DLLAPI_CORE global_timer
+{
 public:
 	/**
 	 \~english @brief Pause global time measurement.

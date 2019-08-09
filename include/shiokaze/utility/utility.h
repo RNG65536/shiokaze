@@ -28,14 +28,16 @@
 #include <cstdarg>
 #include <iostream>
 #include <fstream>
-#include <sys/stat.h>
-#include <sys/time.h>
-#include <sys/resource.h>
-#include <unistd.h>
+//#include <sys/stat.h>
+//#include <sys/time.h>
+//#include <sys/resource.h>
+//#include <unistd.h>
 #include <vector>
 //
 #include <shiokaze/math/vec.h>
 #include <shiokaze/math/vec.h>
+
+#include <chrono>
 //
 SHKZ_BEGIN_NAMESPACE
 //
@@ -74,9 +76,17 @@ public:
 	 @return マイクロ秒。
 	 */
 	static unsigned long get_microseconds() {
+#if 0
 		struct timeval tv;
 		gettimeofday(&tv, nullptr);
 		return tv.tv_sec*1000000 + tv.tv_usec;
+#else
+        static auto begin = std::chrono::steady_clock::now();
+        auto        end = std::chrono::steady_clock::now();
+        auto        duration =
+            std::chrono::duration_cast<std::chrono::microseconds>(end - begin);
+        return unsigned long(duration.count());
+#endif
 	}
 	/**
 	 \~english @brief Get milliseconds.

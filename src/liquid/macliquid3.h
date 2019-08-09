@@ -43,7 +43,14 @@
 //
 SHKZ_BEGIN_NAMESPACE
 //
-class macliquid3 : public drawable {
+
+#ifdef DLLEXPORT_MACLIQUID3
+#define DLLAPI_MACLIQUID3 DLLAPI_EXPORT
+#else
+#define DLLAPI_MACLIQUID3 DLLAPI_IMPORT
+#endif
+
+class DLLAPI_MACLIQUID3 macliquid3 : public drawable {
 public:
 	//
 	LONG_NAME("MAC Liquid 3D")

@@ -34,7 +34,14 @@
 //
 SHKZ_BEGIN_NAMESPACE
 //
-class macbackwardflip2 : public macbackwardflip2_interface {
+
+#ifdef DLLEXPORT_MACBACKWARDFLIP2
+#define DLLAPI_MACBACKWARDFLIP2 DLLAPI_EXPORT
+#else
+#define DLLAPI_MACBACKWARDFLIP2 DLLAPI_IMPORT
+#endif
+
+class DLLAPI_MACBACKWARDFLIP2 macbackwardflip2 : public macbackwardflip2_interface {
 protected:
 	//
 	MODULE_NAME("macbackwardflip2")

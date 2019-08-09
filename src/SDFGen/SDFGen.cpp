@@ -123,7 +123,13 @@ protected:
 	double m_scaling {0.0};
 };
 //
-extern "C" module * create_instance() {
+#ifdef DLLEXPORT_SDFGEN
+#define DLLAPI_SDFGEN DLLAPI_EXPORT
+#else
+#define DLLAPI_SDFGEN DLLAPI_IMPORT
+#endif
+
+extern "C" DLLAPI_SDFGEN module * create_instance() {
 	return new SDFGen();
 }
 //

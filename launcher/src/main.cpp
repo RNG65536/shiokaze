@@ -25,17 +25,24 @@
 #include <iostream>
 #include <dlfcn.h>
 #include <thread>
+#include <mutex>
 #include <shiokaze/core/filesystem.h>
+
+#include <ui/ui.h>
 //
 SHKZ_USING_NAMESPACE
 //
+// NOTE : to specify an example, pass Target=${DemoName} as arguments
 int main ( int argc, const char* argv[] ) {
 	//
-	pthread_mutex_t mutex;
-	pthread_mutex_init(&mutex, NULL);
-	//
+	//pthread_mutex_t mutex;
+	//pthread_mutex_init(&mutex, NULL);
+    std::mutex mutex;
+    
+    //
 	std::thread dummy([](){}); dummy.join(); // Dummy code to enforce linking against thread
-	const auto handle = ::dlopen(filesystem::resolve_libname("shiokaze_ui").c_str(),RTLD_LAZY);
+	//const auto handle = ::dlopen(filesystem::resolve_libname("shiokaze_ui").c_str(),RTLD_LAZY);
+	const auto handle = ::dlopen(filesystem::resolve_libname("ui").c_str(),RTLD_LAZY);
 	int result (0);
 	if( ! handle ) {
 		std::cout << "Could not open the library: " << ::dlerror() << std::endl;
@@ -51,7 +58,7 @@ int main ( int argc, const char* argv[] ) {
 			}
 		}
 	}
-	//
 	return result;
+//
 }
 //

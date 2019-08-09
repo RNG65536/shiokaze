@@ -114,7 +114,13 @@ private:
 	gridvisualizer3_driver m_gridvisualizer{this,"gridvisualizer3"};
 };
 //
-extern "C" module * create_instance() {
+#ifdef DLLEXPORT_LEVELSET3EXAMPLE
+#define DLLAPI_LEVELSET3EXAMPLE DLLAPI_EXPORT
+#else
+#define DLLAPI_LEVELSET3EXAMPLE DLLAPI_IMPORT
+#endif
+
+extern "C" DLLAPI_LEVELSET3EXAMPLE module * create_instance() {
 	return new levelset3;
 }
 //

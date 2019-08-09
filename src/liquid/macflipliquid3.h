@@ -31,7 +31,14 @@
 //
 SHKZ_BEGIN_NAMESPACE
 //
-class macflipliquid3 : public macliquid3 {
+
+#ifdef DLLEXPORT_MACFLIPLIQUID3
+#define DLLAPI_MACFLIPLIQUID3 DLLAPI_EXPORT
+#else
+#define DLLAPI_MACFLIPLIQUID3 DLLAPI_IMPORT
+#endif
+
+class DLLAPI_MACFLIPLIQUID3 macflipliquid3 : public macliquid3 {
 public:
 	//
 	macflipliquid3();

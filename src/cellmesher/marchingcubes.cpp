@@ -126,7 +126,13 @@ protected:
 	//
 };
 //
-extern "C" module * create_instance() {
+#ifdef DLLEXPORT_MARCHINGCUBES
+#define DLLAPI_MARCHINGCUBES DLLAPI_EXPORT
+#else
+#define DLLAPI_MARCHINGCUBES DLLAPI_IMPORT
+#endif
+
+extern "C" DLLAPI_MARCHINGCUBES module * create_instance() {
 	return new marchingcubes;
 }
 //

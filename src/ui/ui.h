@@ -32,6 +32,7 @@
 #include <shiokaze/core/configuration.h>
 #include <shiokaze/system/sysstats_interface.h>
 #include <shiokaze/math/vec.h>
+#include <shiokaze/dllapi.h>
 #include <string>
 //
 SHKZ_BEGIN_NAMESPACE
@@ -74,6 +75,15 @@ public:
 	vec2d m_pos0;
 	vec2d m_mouse_pos;
 };
+
+#ifdef DLLEXPORT_UI
+#define DLLAPI_UI DLLAPI_EXPORT
+#else
+#define DLLAPI_UI DLLAPI_IMPORT
+#endif
+
+extern "C" DLLAPI_UI int run(int argc, const char* argv[]);
+
 //
 SHKZ_END_NAMESPACE
 //

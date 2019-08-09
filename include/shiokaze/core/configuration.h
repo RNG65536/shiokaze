@@ -30,13 +30,23 @@
 #include <stack>
 #include <shiokaze/core/common.h>
 #include <shiokaze/core/credit.h>
+
+#include <shiokaze/dllapi.h>
 //
 SHKZ_BEGIN_NAMESPACE
 //
+
+#ifdef DLLEXPORT_CORE
+#define DLLAPI_CORE DLLAPI_EXPORT
+#else
+#define DLLAPI_CORE DLLAPI_IMPORT
+#endif
+
 /** @file */
 /// \~english @brief  Class that controls the settings of the program.
 /// \~japanese @brief プログラムの設定などを管理するクラス。
-class configuration {
+class DLLAPI_CORE configuration
+{
 public:
 	/**
 	 \~english @brief Default constructor for configuration.

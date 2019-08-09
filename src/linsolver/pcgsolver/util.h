@@ -160,7 +160,7 @@ inline T ramp(T r)
 
 #ifdef WIN32
 // there may be some fancy bit-trickery that's faster...
-inline long lround(double x)
+inline long Lround(double x)
 {
    if(x>0)
       return (x-floor(x)<0.5) ? (long)floor(x) : (long)ceil(x);

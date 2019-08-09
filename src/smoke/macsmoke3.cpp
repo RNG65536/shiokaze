@@ -430,7 +430,7 @@ void macsmoke3::render_density( int frame ) const {
 	global_timer::resume();
 }
 //
-extern "C" module * create_instance() {
+extern "C" DLLAPI_MACSMOKE3 module * create_instance() {
 	return new macsmoke3;
 }
 //

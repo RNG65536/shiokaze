@@ -162,14 +162,14 @@ protected:
 		//
 		if( ! m_tiles[n] ) {
 			bool active (false);
-			unsigned char buffer[m_element_bytes ? m_element_bytes : 1];
-			func(m_element_bytes ? buffer : nullptr,active);
+			std::vector<unsigned char> buffer(m_element_bytes ? m_element_bytes : 1);
+			func(m_element_bytes ? buffer.data() : nullptr,active);
 			if( active ) {
 				unsigned Zx = std::min(m_nx-oi,m_Z);
 				unsigned Zy = std::min(m_ny-oj,m_Z);
 				m_tiles[n] = new chunk2(oi,oj,Zx,Zy,m_element_bytes);
 				if( block_filled(n)) m_tiles[n]->fill_all();
-				m_tiles[n]->set(i-oi,j-oj,buffer);
+				m_tiles[n]->set(i-oi,j-oj,buffer.data());
 			}
 		} else {
 			m_tiles[n]->set(i-oi,j-oj,func);
@@ -367,7 +367,7 @@ loop_escape:
 			}
 			if( result ) return true;
 		} else {
-			unsigned char buffer[m_element_bytes ? m_element_bytes : 1];
+			std::vector<unsigned char> buffer(m_element_bytes ? m_element_bytes : 1);
 			int oi = bi*m_Z;
 			int oj = bj*m_Z;
 			unsigned Zx = std::min(m_Z,m_nx-oi);
@@ -376,7 +376,7 @@ loop_escape:
 				bool active (false);
 				int i = oi+ii;
 				int j = oj+jj;
-				func(i,j,m_element_bytes ? buffer : nullptr,active,block_filled(n));
+				func(i,j,m_element_bytes ? buffer.data() : nullptr,active,block_filled(n));
 				if( active ) {
 					if( ! m_tiles[n] ) {
 						unsigned Zx = std::min(m_nx-oi,m_Z);
@@ -384,7 +384,7 @@ loop_escape:
 						m_tiles[n] = new chunk2(oi,oj,Zx,Zy,m_element_bytes);
 						if( block_filled(n)) m_tiles[n]->fill_all();
 					}
-					m_tiles[n]->set(ii,jj,buffer);
+					m_tiles[n]->set(ii,jj,buffer.data());
 				}
 			}
 			if( m_tiles[n] ) assert(m_tiles[n]->debug_verify_active_count());
@@ -784,7 +784,13 @@ private:
 	};
 };
 //
-extern "C" module * create_instance() {
+#ifdef DLLEXPORT_TILEDARRAY2
+#define DLLAPI_TILEDARRAY2 DLLAPI_EXPORT
+#else
+#define DLLAPI_TILEDARRAY2 DLLAPI_IMPORT
+#endif
+
+extern "C" DLLAPI_TILEDARRAY2 module * create_instance() {
 	return new tiledarray2();
 }
 //

@@ -31,7 +31,7 @@
 //
 SHKZ_USING_NAMESPACE
 //
-static void append( const void *data, uint size, std::vector<uint8_t> &buffer ) {
+static void append( const void *data, unsigned int size, std::vector<uint8_t> &buffer ) {
 	buffer.insert(buffer.end(),(uint8_t *)data,(uint8_t *)data+size);
 }
 //
@@ -72,7 +72,14 @@ static void compress_memory( void *in_data, size_t in_data_size, std::vector<uin
 	out_data.swap(buffer);
 }
 //
-class meshexporter3 : public meshexporter3_interface {
+
+#ifdef DLLEXPORT_MESHEXPORTER3
+#define DLLAPI_MESHEXPORTER3 DLLAPI_EXPORT
+#else
+#define DLLAPI_MESHEXPORTER3 DLLAPI_IMPORT
+#endif
+
+class DLLAPI_MESHEXPORTER3 meshexporter3 : public meshexporter3_interface {
 public:
 	//
 	MODULE_NAME("meshexporter3")
@@ -131,7 +138,7 @@ protected:
 			printf ( "Could not open the path (%s)\n", path.c_str());
 			return false;
 		}
-		for( uint n=0; n<vertices.size(); n++ ) {
+		for( unsigned int n=0; n<vertices.size(); n++ ) {
 			float v[3] = { (float)vertices[n][0], (float)vertices[n][1], (float)vertices[n][2] };
 			fwrite(v,3,sizeof(float),ply_fp);
 			if( vertex_colors.size()) {
@@ -147,7 +154,7 @@ protected:
 			}
 		}
 		// Write faces
-		for( uint n=0; n<faces.size(); n++ ) {
+		for( unsigned int n=0; n<faces.size(); n++ ) {
 			unsigned char num = faces[n].size();
 			fwrite( &num,1,sizeof(unsigned char),ply_fp);
 			for( unsigned m=0; m<faces[n].size(); m++ ) {
@@ -262,7 +269,7 @@ protected:
 	std::vector<std::vector<size_t> > faces;
 };
 //
-extern "C" module * create_instance() {
+extern "C" DLLAPI_MESHEXPORTER3 module * create_instance() {
 	return new meshexporter3();
 }
 //

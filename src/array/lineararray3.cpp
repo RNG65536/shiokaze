@@ -472,7 +472,14 @@ private:
 	}
 };
 //
-extern "C" module * create_instance() {
+#ifdef DLLEXPORT_LINEARARRAY3
+#define DLLAPI_LINEARARRAY3 DLLAPI_EXPORT
+#else
+#define DLLAPI_LINEARARRAY3 DLLAPI_IMPORT
+#endif
+
+extern "C" DLLAPI_LINEARARRAY3 module* create_instance()
+{
 	return new lineararray3();
 }
 //

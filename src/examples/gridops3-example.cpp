@@ -48,7 +48,13 @@ private:
 	//
 };
 //
-extern "C" module * create_instance() {
+#ifdef DLLEXPORT_GRIDOPS3EXAMPLE
+#define DLLAPI_GRIDOPS3EXAMPLE DLLAPI_EXPORT
+#else
+#define DLLAPI_GRIDOPS3EXAMPLE DLLAPI_IMPORT
+#endif
+
+extern "C" DLLAPI_GRIDOPS3EXAMPLE module * create_instance() {
 	return new gridops3;
 }
 //

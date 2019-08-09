@@ -87,7 +87,13 @@ private:
 	vec2d m_mouse_pos;
 };
 //
-extern "C" module * create_instance() {
+#ifdef DLLEXPORT_DEMOEXAMPLE
+#define DLLAPI_DEMOEXAMPLE DLLAPI_EXPORT
+#else
+#define DLLAPI_DEMOEXAMPLE DLLAPI_IMPORT
+#endif
+
+extern "C" DLLAPI_DEMOEXAMPLE module * create_instance() {
 	return new demo;
 }
 //

@@ -30,7 +30,14 @@
 //
 SHKZ_BEGIN_NAMESPACE
 //
-class blockordering : public ordering_core {
+
+#ifdef DLLEXPORT_BLOCKORDERING
+#define DLLAPI_BLOCKORDERING DLLAPI_EXPORT
+#else
+#define DLLAPI_BLOCKORDERING DLLAPI_IMPORT
+#endif
+
+class DLLAPI_BLOCKORDERING blockordering : public ordering_core {
 public:
 	//
 	LONG_NAME("Block Ordering Encoder/Decoder")
@@ -209,7 +216,7 @@ private:
 	bool use_zordering;
 };
 //
-extern "C" module * create_instance() {
+extern "C" DLLAPI_BLOCKORDERING module * create_instance() {
 	return new blockordering();
 }
 //

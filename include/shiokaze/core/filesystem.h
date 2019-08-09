@@ -27,13 +27,23 @@
 //
 #include <shiokaze/core/common.h>
 #include <string>
+
+#include <shiokaze/dllapi.h>
 //
 SHKZ_BEGIN_NAMESPACE
 //
+
+#ifdef DLLEXPORT_CORE
+#define DLLAPI_CORE DLLAPI_EXPORT
+#else
+#define DLLAPI_CORE DLLAPI_IMPORT
+#endif
+
 /** @file */
 /// \~english @brief Class that perform file system related tasks.
 /// \~japanese @brief ファイルシステム関連の処理を行うクラス。
-class filesystem {
+class DLLAPI_CORE filesystem
+{
 public:
 	/**
 	 \~english @brief Check if the file to a path exists

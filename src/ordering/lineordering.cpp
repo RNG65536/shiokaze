@@ -29,7 +29,14 @@
 //
 SHKZ_BEGIN_NAMESPACE
 //
-class lineordering : public ordering_core {
+
+#ifdef DLLEXPORT_LINEORDERING
+#define DLLAPI_LINEORDERING DLLAPI_EXPORT
+#else
+#define DLLAPI_LINEORDERING DLLAPI_IMPORT
+#endif
+
+class DLLAPI_LINEORDERING lineordering : public ordering_core {
 protected:
 	//
 	LONG_NAME("Line Ordering Encoder/Decoder")
@@ -123,7 +130,7 @@ private:
 	};
 };
 //
-extern "C" module * create_instance() {
+extern "C" DLLAPI_LINEORDERING module * create_instance() {
 	return new lineordering();
 }
 //

@@ -203,7 +203,7 @@ void macliquid2::draw( graphics_engine &g ) const {
 	m_macvisualizer->draw_velocity(g,m_velocity);
 }
 //
-extern "C" module * create_instance() {
+extern "C" DLLAPI_MACLIQUID2 module * create_instance() {
 	return new macliquid2;
 }
 //

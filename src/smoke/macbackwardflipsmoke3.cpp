@@ -138,7 +138,7 @@ void macbackwardflipsmoke3::draw( graphics_engine &g ) const {
 	g.draw_string(vec2d(0.01,0.01).v, console::format_str("Energy = %.3e",kinetic_energy).c_str());
 }
 //
-extern "C" module * create_instance() {
+extern "C" DLLAPI_MACBACKWARDFLIPSMOKE3 module * create_instance() {
 	return new macbackwardflipsmoke3;
 }
 //

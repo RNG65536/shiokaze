@@ -64,7 +64,13 @@ protected:
 	}
 };
 //
-extern "C" module * create_instance() {
+#ifdef DLLEXPORT_STDTHREAD
+#define DLLAPI_STDTHREAD DLLAPI_EXPORT
+#else
+#define DLLAPI_STDTHREAD DLLAPI_IMPORT
+#endif
+
+extern "C" DLLAPI_STDTHREAD module * create_instance() {
 	return new stdthread();
 }
 //

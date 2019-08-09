@@ -31,13 +31,23 @@
 #include <map>
 #include <cassert>
 #include <algorithm>
+
+#include <shiokaze/dllapi.h>
 //
 SHKZ_BEGIN_NAMESPACE
 //
+
+#ifdef DLLEXPORT_CORE
+#define DLLAPI_CORE DLLAPI_EXPORT
+#else
+#define DLLAPI_CORE DLLAPI_IMPORT
+#endif
+
 /** @file */
 /// \~english @brief Class for managing the workflow of load - configure - initialize.
 /// \~japanese @brief load - configure - initialize ワークフローを管理するための基本クラス。
-class configurable {
+class DLLAPI_CORE configurable
+{
 public:
 	/**
 	 \~english @brief Type for environment_map.

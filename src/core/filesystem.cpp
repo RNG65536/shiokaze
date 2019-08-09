@@ -57,11 +57,15 @@ std::string filesystem::find_resource_path( std::string directory, std::string n
 //
 std::string filesystem::resolve_libname( std::string name ) {
 	//
+#if 0
 #ifdef __APPLE__
 	static const std::string extension ("dylib");
 #else
 	static const std::string extension ("so");
 #endif
 	std::string libname = std::string("lib")+name+SHKZ_SUFFIX+"."+extension;
+#else
+	std::string libname = name+".dll";
+#endif
 	return libname;
 }

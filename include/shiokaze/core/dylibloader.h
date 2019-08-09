@@ -27,13 +27,23 @@
 //
 #include <shiokaze/core/configurable.h>
 #include <string>
+
+#include <shiokaze/dllapi.h>
 //
 SHKZ_BEGIN_NAMESPACE
 //
+
+#ifdef DLLEXPORT_CORE
+#define DLLAPI_CORE DLLAPI_EXPORT
+#else
+#define DLLAPI_CORE DLLAPI_IMPORT
+#endif
+
 /** @file */
 /// \~english @brief Class that takes in charge of loading dynamic libraries.
 /// \~japanese @brief 動的ライブラリの読み込みを行うクラス。
-class dylibloader : public configurable {
+class DLLAPI_CORE dylibloader : public configurable
+{
 public:
 	/**
 	 \~english @brief Default constructor for dylibloader.

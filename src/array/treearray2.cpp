@@ -1301,7 +1301,8 @@ protected:
 	}
 	//
 	virtual void dilate( std::function<void(int i, int j, void *value_ptr, bool &active, const bool &filled, int thread_index)> func, const parallel_driver &parallel ) override {
-		dilate2::dilate<__uint128_t>(this,func,parallel);
+		//dilate2::dilate<__uint128_t>(this,func,parallel);
+		dilate2::dilate<uint64_t>(this,func,parallel);
 	}
 	//
 	virtual void flood_fill( std::function<bool(void *value_ptr)> inside_func, const parallel_driver &parallel ) override {
@@ -1343,7 +1344,13 @@ protected:
 	std::thread::id m_main_thread_id;
 };
 //
-extern "C" module * create_instance() {
+#ifdef DLLEXPORT_TREEARRAY2
+#define DLLAPI_TREEARRAY2 DLLAPI_EXPORT
+#else
+#define DLLAPI_TREEARRAY2 DLLAPI_IMPORT
+#endif
+
+extern "C" DLLAPI_TREEARRAY2 module * create_instance() {
 	return new treearray2();
 }
 //

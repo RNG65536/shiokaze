@@ -437,7 +437,14 @@ const_serial_all_end: ;
 	}
 };
 //
-extern "C" module * create_instance() {
+#ifdef DLLEXPORT_LINEARARRAY2
+#define DLLAPI_LINEARARRAY2 DLLAPI_EXPORT
+#else
+#define DLLAPI_LINEARARRAY2 DLLAPI_IMPORT
+#endif
+
+extern "C" DLLAPI_LINEARARRAY2 module* create_instance()
+{
 	return new lineararray2();
 }
 //

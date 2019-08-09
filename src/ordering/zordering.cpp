@@ -31,7 +31,14 @@
 //
 SHKZ_BEGIN_NAMESPACE
 //
-class zordering : public ordering_core {
+
+#ifdef DLLEXPORT_ZORDERING
+#define DLLAPI_ZORDERING DLLAPI_EXPORT
+#else
+#define DLLAPI_ZORDERING DLLAPI_IMPORT
+#endif
+
+class DLLAPI_ZORDERING zordering : public ordering_core {
 protected:
 	//
 	LONG_NAME("Z-Curve Ordering Encoder/Decoder")
@@ -230,7 +237,7 @@ private:
 	};
 };
 //
-extern "C" module * create_instance() {
+extern "C" DLLAPI_ZORDERING module * create_instance() {
 	return new zordering();
 }
 //

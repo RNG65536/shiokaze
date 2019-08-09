@@ -134,7 +134,13 @@ protected:
 	//
 };
 //
-extern "C" module * create_instance() {
+#ifdef DLLEXPORT_MESHUTILITY3
+#define DLLAPI_MESHUTILITY3 DLLAPI_EXPORT
+#else
+#define DLLAPI_MESHUTILITY3 DLLAPI_IMPORT
+#endif
+
+extern "C" DLLAPI_MESHUTILITY3 module * create_instance() {
 	return new meshutility3();
 }
 //

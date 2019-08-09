@@ -100,7 +100,13 @@ private:
 	meshexporter3_driver m_exporter{"meshexporter3"};
 };
 //
-extern "C" module * create_instance() {
+#ifdef DLLEXPORT_MESHEXPORTER3DEMO
+#define DLLAPI_MESHEXPORTER3DEMO DLLAPI_EXPORT
+#else
+#define DLLAPI_MESHEXPORTER3DEMO DLLAPI_IMPORT
+#endif
+
+extern "C" DLLAPI_MESHEXPORTER3DEMO module * create_instance() {
 	return new meshexporter_demo3;
 }
 //

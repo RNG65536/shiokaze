@@ -119,7 +119,13 @@ protected:
 	};
 };
 //
-extern "C" module * create_instance() {
+#ifdef DLLEXPORT_SEQUENTIALSPLITTER
+#define DLLAPI_SEQUENTIALSPLITTER DLLAPI_EXPORT
+#else
+#define DLLAPI_SEQUENTIALSPLITTER DLLAPI_IMPORT
+#endif
+
+extern "C" DLLAPI_SEQUENTIALSPLITTER module * create_instance() {
 	return new sequential_splitter();
 }
 //

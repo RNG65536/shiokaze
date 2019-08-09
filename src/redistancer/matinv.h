@@ -63,14 +63,14 @@ public:
 	static bool invert4x4( const T A[4][4], T result[4][4] ) {
 		T M[16];
 		T Minv[16];
-		for( uint i=0; i<4; i++ ) {
-			for( uint j=0; j<4; j++ ) {
+		for( unsigned int i=0; i<4; i++ ) {
+			for( unsigned int j=0; j<4; j++ ) {
 				M[i+4*j] = A[i][j];
 			}
 		}
 		if( ! myInvertMatrix(M,Minv)) return false;
-		for( uint i=0; i<4; i++ ) {
-			for( uint j=0; j<4; j++ ) {
+		for( unsigned int i=0; i<4; i++ ) {
+			for( unsigned int j=0; j<4; j++ ) {
 				result[i][j] = Minv[i+4*j];
 			}
 		}

@@ -31,7 +31,14 @@
 //
 SHKZ_BEGIN_NAMESPACE
 //
-class macflipliquid2 : public macliquid2 {
+
+#ifdef DLLEXPORT_MACFLIPLIQUID2
+#define DLLAPI_MACFLIPLIQUID2 DLLAPI_EXPORT
+#else
+#define DLLAPI_MACFLIPLIQUID2 DLLAPI_IMPORT
+#endif
+
+class DLLAPI_MACFLIPLIQUID2 macflipliquid2 : public macliquid2 {
 public:
 	//
 	macflipliquid2();

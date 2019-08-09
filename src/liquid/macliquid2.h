@@ -41,7 +41,14 @@
 //
 SHKZ_BEGIN_NAMESPACE
 //
-class macliquid2 : public drawable {
+
+#ifdef DLLEXPORT_MACLIQUID2
+#define DLLAPI_MACLIQUID2 DLLAPI_EXPORT
+#else
+#define DLLAPI_MACLIQUID2 DLLAPI_IMPORT
+#endif
+
+class DLLAPI_MACLIQUID2 macliquid2 : public drawable {
 public:
 	//
 	macliquid2();

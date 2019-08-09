@@ -40,7 +40,14 @@
 //
 SHKZ_BEGIN_NAMESPACE
 //
-class macsmoke3 : public drawable {
+
+#ifdef DLLEXPORT_MACSMOKE3
+#define DLLAPI_MACSMOKE3 DLLAPI_EXPORT
+#else
+#define DLLAPI_MACSMOKE3 DLLAPI_IMPORT
+#endif
+
+class DLLAPI_MACSMOKE3 macsmoke3 : public drawable {
 public:
 	//
 	macsmoke3();

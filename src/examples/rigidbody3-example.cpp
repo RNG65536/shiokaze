@@ -268,7 +268,13 @@ private:
 	Parameters m_param;
 };
 //
-extern "C" module * create_instance() {
+#ifdef DLLEXPORT_RIGIDBODY3EXAMPLE
+#define DLLAPI_RIGIDBODY3EXAMPLE DLLAPI_EXPORT
+#else
+#define DLLAPI_RIGIDBODY3EXAMPLE DLLAPI_IMPORT
+#endif
+
+extern "C" DLLAPI_RIGIDBODY3EXAMPLE module * create_instance() {
 	return new rigidbody3_example;
 }
 //

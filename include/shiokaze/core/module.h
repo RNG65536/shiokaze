@@ -31,9 +31,18 @@
 #include <iostream>
 #include <memory>
 #include <cassert>
+
+#include <shiokaze/dllapi.h>
 //
 SHKZ_BEGIN_NAMESPACE
 //
+
+#ifdef DLLEXPORT_CORE
+#define DLLAPI_CORE DLLAPI_EXPORT
+#else
+#define DLLAPI_CORE DLLAPI_IMPORT
+#endif
+
 /** @file */
 /// \~english @brief Macro that simplifies the use of quick_alloc_module.
 /// \~japanese @brief quick_alloc_module を簡単に使うための定義。
@@ -47,7 +56,8 @@ SHKZ_BEGIN_NAMESPACE
 //
 /// \~english @brief Module class.
 /// \~japanese @brief モジュールクラス。
-class module : public credit {
+class DLLAPI_CORE module : public credit
+{
 public:
 	/**
 	 \~english @brief Default constructor for module.

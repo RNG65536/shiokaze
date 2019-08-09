@@ -97,7 +97,13 @@ protected:
 	double m_dx;
 };
 //
-extern "C" module * create_instance() {
+#ifdef DLLEXPORT_MACVISUALIZER2
+#define DLLAPI_MACVISUALIZER2 DLLAPI_EXPORT
+#else
+#define DLLAPI_MACVISUALIZER2 DLLAPI_IMPORT
+#endif
+
+extern "C" DLLAPI_MACVISUALIZER2 module * create_instance() {
 	return new macvisualizer2();
 }
 //

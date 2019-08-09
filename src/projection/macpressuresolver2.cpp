@@ -275,7 +275,13 @@ protected:
 	//
 };
 //
-extern "C" module * create_instance() {
+#ifdef DLLEXPORT_MACPRESSURESOLVER2
+#define DLLAPI_MACPRESSURESOLVER2 DLLAPI_EXPORT
+#else
+#define DLLAPI_MACPRESSURESOLVER2 DLLAPI_IMPORT
+#endif
+
+extern "C" DLLAPI_MACPRESSURESOLVER2 module * create_instance() {
 	return new macpressuresolver2();
 }
 //

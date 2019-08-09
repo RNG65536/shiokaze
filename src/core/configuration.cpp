@@ -27,8 +27,8 @@
 #include <cstdio>
 #include <cstdlib>
 #include <algorithm>
-#include <sys/ioctl.h>
-#include <unistd.h>
+//#include <sys/ioctl.h>
+//#include <unistd.h>
 #include <mutex>
 #include <boost/date_time/gregorian/gregorian.hpp>
 //
@@ -86,10 +86,11 @@ void configuration::print_bar( std::string str ) {
 		}
 	}
 	//
-	struct winsize size;
-	ioctl(STDOUT_FILENO,TIOCGWINSZ,&size);
+	//struct winsize size;
+	//ioctl(STDOUT_FILENO,TIOCGWINSZ,&size);
 	int pad = str.empty() ? 0 : 2;
-	int max_size = std::min(MAX_WIDTH,(int)size.ws_col)-1;
+	//int max_size = std::min(MAX_WIDTH,(int)size.ws_col)-1;
+	int max_size = MAX_WIDTH;
 	int L = std::max(3,max_size-(int)(2*pad+str.size()));
 	int n = L / 2, m = L - n;
 	for( int i=0; i<n; ++i ) console::dump("-");
@@ -103,9 +104,10 @@ void configuration::print_bar( std::string str ) {
 //
 void configuration::print_center( std::string str ) {
 	//
-	struct winsize size;
-	ioctl(STDOUT_FILENO,TIOCGWINSZ,&size);
-	int max_size = std::min(MAX_WIDTH,(int)size.ws_col)-1;
+	//struct winsize size;
+	//ioctl(STDOUT_FILENO,TIOCGWINSZ,&size);
+	//int max_size = std::min(MAX_WIDTH,(int)size.ws_col)-1;
+	int max_size = MAX_WIDTH;
 	int L = std::max(3,max_size-(int)(str.size()));
 	int n = L / 2, m = L - n;
 	for( int i=0; i<n; ++i ) console::dump(" ");

@@ -106,7 +106,13 @@ private:
 	double m_view_scale {1.0};
 };
 //
-extern "C" module * create_instance() {
+#ifdef DLLEXPORT_RIGIDBODY2EXAMPLE
+#define DLLAPI_RIGIDBODY2EXAMPLE DLLAPI_EXPORT
+#else
+#define DLLAPI_RIGIDBODY2EXAMPLE DLLAPI_IMPORT
+#endif
+
+extern "C" DLLAPI_RIGIDBODY2EXAMPLE module * create_instance() {
 	return new rigidbody2_example;
 }
 //

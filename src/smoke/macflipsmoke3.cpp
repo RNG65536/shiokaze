@@ -166,7 +166,7 @@ void macflipsmoke3::draw( graphics_engine &g ) const {
 	m_flip->draw(g,m_timestepper->get_current_time());
 }
 //
-extern "C" module * create_instance() {
+extern "C" DLLAPI_MACFLIPSMOKE3 module * create_instance() {
 	return new macflipsmoke3;
 }
 //

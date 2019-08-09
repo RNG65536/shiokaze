@@ -36,6 +36,7 @@ using boost::posix_time::second_clock;
 SHKZ_USING_NAMESPACE
 //
 static ::std::string run( const char *format, ...) {
+#if 0
 	char command[512];
 	va_list args;
 	va_start(args, format);
@@ -55,6 +56,10 @@ static ::std::string run( const char *format, ...) {
 	fflush(pipe);
 	pclose(pipe);
 	return result;
+#else
+    assert(false);
+    return "";
+#endif
 }
 //
 class environment : public environment_interface {
@@ -81,9 +86,9 @@ protected:
 	}
 	virtual std::string get_gcc_version() const override {
 		std::string version_str;
-		version_str += std::to_string(__GNUC__) + ".";
-		version_str += std::to_string(__GNUC_MINOR__) + ".";
-		version_str += std::to_string(__GNUC_PATCHLEVEL__);
+		//version_str += std::to_string(__GNUC__) + ".";
+		//version_str += std::to_string(__GNUC_MINOR__) + ".";
+		//version_str += std::to_string(__GNUC_PATCHLEVEL__);
 		return version_str;
 	}
 	virtual std::string get_git_revnumber() const override {
@@ -95,7 +100,13 @@ protected:
 	//
 };
 //
-extern "C" module * create_instance() {
+#ifdef DLLEXPORT_ENVIRONMENT
+#define DLLAPI_ENVIRONMENT DLLAPI_EXPORT
+#else
+#define DLLAPI_ENVIRONMENT DLLAPI_IMPORT
+#endif
+
+extern "C" DLLAPI_ENVIRONMENT module * create_instance() {
 	return new environment();
 }
 //

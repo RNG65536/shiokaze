@@ -27,6 +27,11 @@
 #include <shiokaze/array/array_utility2.h>
 #include <shiokaze/array/array_interpolator2.h>
 #include <algorithm>
+
+#ifndef M_PI
+const double M_PI = 3.1415926535897932384626433832795;
+#endif
+
 //
 SHKZ_USING_NAMESPACE
 //
@@ -192,7 +197,7 @@ void macexnbflip2::compute_sizing_func( const array2<float> &fluid, const bitarr
 	}
 }
 //
-extern "C" module * create_instance() {
+extern "C" DLLAPI_MACEXNBFLIP2 module * create_instance() {
 	return new macexnbflip2();
 }
 //
